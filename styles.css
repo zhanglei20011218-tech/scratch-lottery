@@ -1972,6 +1972,31 @@ main {
   }
 }
 
+/* 体彩顶呱刮入口 */
+.cross-link {
+  margin: 22px 0 0;
+  text-align: center;
+}
+
+.cross-link a {
+  display: inline-block;
+  padding: 9px 18px;
+  border-radius: 999px;
+  border: 1px solid rgba(232, 182, 76, 0.35);
+  background: rgba(232, 182, 76, 0.08);
+  color: var(--gold-light);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-decoration: none;
+  transition: background 0.15s ease, border-color 0.15s ease;
+}
+
+.cross-link a:hover {
+  background: rgba(232, 182, 76, 0.16);
+  border-color: rgba(232, 182, 76, 0.6);
+}
+
 /* ═══════════════════════════════════════════════════════════
    真实即开票版式（v2）
    竖版票面 · 票样陈列 · 品牌条 / 银色刮开区 / 条码 / 票号

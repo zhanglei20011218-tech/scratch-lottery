@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#b4121b">
+  <title>顶呱刮 · 在线试刮</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand">
+      <span class="brand-badge" aria-hidden="true">顶</span>
+      <div class="brand-text">
+        <h1>顶呱刮</h1>
+        <p>中国体育彩票 · 即开票试刮</p>
+      </div>
+    </div>
+    <div class="top-actions">
+      <div class="wallet" id="wallet">
+        <span>余额</span>
+        <b id="balance">¥100</b>
+        <button id="btn-charge" type="button">＋ 充值</button>
+      </div>
+      <button class="icon-btn" id="btn-stats" type="button">账本</button>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="hero-copy">
+        <p class="kicker">官方在售 91 款 · 5–50 元</p>
+        <h2>挑一张，<em>刮</em>开看看</h2>
+        <p class="hero-sub">票面、玩法规则与奖级来自中国体彩网公开数据；中奖概率为模拟，不提供真实奖金。</p>
+      </div>
+      <div class="hero-mark" aria-hidden="true">
+        <span>顶</span>
+        <b>呱刮</b>
+      </div>
+    </section>
+
+    <section class="toolbar" aria-label="筛选票种">
+      <div class="chips" id="price-chips"></div>
+      <label class="search">
+        <span aria-hidden="true">⌕</span>
+        <input id="search" type="search" placeholder="搜索票名或玩法" autocomplete="off">
+      </label>
+    </section>
+
+    <p class="result-count" id="result-count"></p>
+
+    <section class="rack" id="rack" aria-label="顶呱刮票库"></section>
+
+    <section class="ledger" aria-label="本局统计">
+      <div class="ledger-item"><span>已刮</span><b id="stat-count">0 张</b></div>
+      <div class="ledger-item"><span>投入</span><b id="stat-spent">¥0</b></div>
+      <div class="ledger-item"><span>中奖</span><b id="stat-won">¥0</b></div>
+      <div class="ledger-item"><span>净收益</span><b id="stat-net">¥0</b></div>
+    </section>
+
+    <p class="disclaimer">
+      <b>非官方模拟器，仅供娱乐。</b>票面图片、玩法规则与奖级数据来自中国体彩网公开页面，版权归原权利人；本页面不提供真实奖金，中奖概率与真实彩票不同。理性购彩，未满 18 周岁请勿购买彩票。
+    </p>
+  </main>
+
+  <!-- ══════════ 试刮弹层 ══════════ -->
+  <div class="modal" id="play-modal" hidden>
+    <div class="modal-bg" data-close-play></div>
+
+    <div class="play-panel" role="dialog" aria-modal="true" aria-labelledby="ticket-name">
+      <button class="close-btn" id="close-play" type="button" aria-label="关闭">✕</button>
+
+      <div class="ticket-stage">
+        <div class="dgg-ticket" id="dgg-ticket">
+          <img class="dgg-layer dgg-head" id="layer-head" alt="">
+          <div class="dgg-scratch" id="scratch-zone">
+            <img class="dgg-layer dgg-mid" id="layer-mid" alt="">
+            <img class="dgg-layer dgg-result" id="layer-result" alt="">
+            <canvas id="scratch-canvas" aria-label="刮开涂层"></canvas>
+            <div class="scratch-hint" id="scratch-hint">
+              <span aria-hidden="true">👆</span>按住鼠标 / 手指刮开
+            </div>
+          </div>
+          <img class="dgg-layer dgg-foot" id="layer-foot" alt="">
+        </div>
+      </div>
+
+      <div class="ticket-info">
+        <div>
+          <h3 id="ticket-name">—</h3>
+          <p id="ticket-play">—</p>
+        </div>
+        <div class="ticket-face">¥<b id="ticket-price">0</b></div>
+      </div>
+
+      <div class="progress">
+        <div class="progress-bar"><i id="progress-fill"></i></div>
+        <span id="progress-text">已刮开 0%</span>
+      </div>
+
+      <div class="play-result" id="play-result" hidden>
+        <div class="result-badge" id="result-badge"></div>
+        <div class="result-actions" id="result-actions">
+          <button class="btn gold" id="btn-redeem" type="button" data-act="redeem">兑奖入账</button>
+          <button class="btn red" type="button" data-act="again">再来一张</button>
+          <button class="btn ghost" type="button" data-act="stop">收手</button>
+        </div>
+      </div>
+
+      <details class="rules" id="rules">
+        <summary>玩法与奖级 <span id="ticket-chance"></span></summary>
+        <p id="ticket-rule"></p>
+        <div class="grades" id="grade-list"></div>
+      </details>
+    </div>
+  </div>
+
+  <!-- ══════════ 账本弹层 ══════════ -->
+  <div class="modal" id="stats-modal" hidden>
+    <div class="modal-bg" data-close-stats></div>
+
+    <div class="stats-panel" role="dialog" aria-modal="true" aria-labelledby="stats-title">
+      <header class="stats-head">
+        <div>
+          <p class="kicker">SCRATCH BOOK</p>
+          <h2 id="stats-title">我的试刮账本</h2>
+        </div>
+        <button class="close-btn close-btn--inline" id="close-stats" type="button" aria-label="关闭">✕</button>
+      </header>
+
+      <div class="stats-grid" id="stats-grid"></div>
+
+      <h3 class="stats-sub">最近试刮</h3>
+      <ul class="history" id="history-list"></ul>
+
+      <div class="stats-actions">
+        <button class="btn gold" id="btn-charge-stats" type="button">模拟充值 ¥100</button>
+        <button class="btn ghost" id="btn-reset" type="button">清空记录，重新开始</button>
+      </div>
+
+      <p class="stats-note">余额与记录仅保存在本机浏览器（localStorage）。本模拟器不提供真实奖金。</p>
+    </div>
+  </div>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <script src="tickets.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
