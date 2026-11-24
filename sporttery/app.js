@@ -337,22 +337,16 @@ function shakeWallet() {
 /* ─────────── 抽奖 ─────────── */
 
 function drawPrize(ticket) {
+  if (Math.random() > WIN_RATE) return 0;
+
+  // 官方中奖图层上印有固定金额，结果必须与票面一致
+  const official = Number(ticket.awardMoney);
+  if (official > 0) return official;
+
   const grades =
     Array.isArray(ticket.grades) && ticket.grades.length
       ? ticket.grades
       : [ticket.price];
-
-  if (Math.random() > WIN_RATE) return 0;
-
-  // grades 为降序，最低奖在末尾；指数权重让低奖更容易出现
-  const weights = grades.map((_, index) =>
-    Math.pow(0.2, grades.length - 1 - index)
-  );
-  let roll = Math.random() * weights.reduce((sum, value) => sum + value, 0);
-  for (let index = 0; index < grades.length; index += 1) {
-    roll -= weights[index];
-    if (roll <= 0) return grades[index];
-  }
   return grades[grades.length - 1];
 }
 
