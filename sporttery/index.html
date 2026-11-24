@@ -72,46 +72,68 @@
 
       <div class="ticket-stage">
         <div class="dgg-ticket" id="dgg-ticket">
-          <img class="dgg-layer dgg-head" id="layer-head" alt="">
-          <div class="dgg-scratch" id="scratch-zone">
-            <img class="dgg-layer dgg-mid" id="layer-mid" alt="">
-            <img class="dgg-layer dgg-result" id="layer-result" alt="">
-            <canvas id="scratch-canvas" aria-label="刮开涂层"></canvas>
-            <div class="scratch-hint" id="scratch-hint">
-              <span aria-hidden="true">👆</span>按住鼠标 / 手指刮开
+          <div class="dgg-face">
+            <img class="dgg-layer dgg-head" id="layer-head" alt="">
+            <div class="dgg-scratch" id="scratch-zone">
+              <img class="dgg-layer dgg-mid" id="layer-mid" alt="">
+              <img class="dgg-layer dgg-result" id="layer-result" alt="">
+              <canvas id="scratch-canvas" aria-label="刮开涂层"></canvas>
+              <div class="scratch-hint" id="scratch-hint">
+                <span aria-hidden="true">👆</span>按住鼠标 / 手指刮开
+              </div>
+            </div>
+            <img class="dgg-layer dgg-foot" id="layer-foot" alt="">
+          </div>
+
+          <div class="dgg-stub">
+            <div class="stub-title">
+              <div>
+                <h3 id="ticket-name">—</h3>
+                <p id="ticket-play">—</p>
+              </div>
+              <div class="stub-price">¥<b id="ticket-price">0</b></div>
+            </div>
+
+            <div class="stub-progress">
+              <div class="progress-bar"><i id="progress-fill"></i></div>
+              <span id="progress-text">已刮开 0%</span>
+            </div>
+
+            <div class="stub-top">
+              <span class="stub-side">兑奖联</span>
+              <div class="stub-main">
+                <div class="stub-row"><span>票号</span><b id="stub-sn">—</b></div>
+                <div class="stub-row"><span>中奖机会</span><b id="stub-chance">—</b></div>
+                <div class="stub-row"><span>票种</span><b>顶呱刮</b></div>
+              </div>
+              <span class="stub-sim">模拟票<br>仅供演示</span>
+            </div>
+            <div class="stub-barcode" id="stub-barcode" aria-hidden="true"></div>
+            <p class="stub-tip">刮开票面中部覆盖层，按玩法规则判断是否中奖。中奖后点击「兑奖入账」，奖金计入模拟余额。</p>
+
+            <details class="rules" id="rules">
+              <summary>玩法与奖级 <span id="ticket-chance"></span></summary>
+              <p id="ticket-rule"></p>
+              <div class="grades" id="grade-list"></div>
+            </details>
+
+            <p class="stub-note">本票为在线模拟试刮，不提供真实奖金 · 请理性购彩</p>
+            <div class="stub-bottom">
+              <span>中国体育彩票 · 顶呱刮</span>
+              <span>www.lottery.gov.cn</span>
+            </div>
+
+            <div class="play-result" id="play-result" hidden>
+              <div class="result-badge" id="result-badge"></div>
+              <div class="result-actions" id="result-actions">
+                <button class="btn gold" id="btn-redeem" type="button" data-act="redeem">兑奖入账</button>
+                <button class="btn red" type="button" data-act="again">再来一张</button>
+                <button class="btn ghost" type="button" data-act="stop">收手</button>
+              </div>
             </div>
           </div>
-          <img class="dgg-layer dgg-foot" id="layer-foot" alt="">
         </div>
       </div>
-
-      <div class="ticket-info">
-        <div>
-          <h3 id="ticket-name">—</h3>
-          <p id="ticket-play">—</p>
-        </div>
-        <div class="ticket-face">¥<b id="ticket-price">0</b></div>
-      </div>
-
-      <div class="progress">
-        <div class="progress-bar"><i id="progress-fill"></i></div>
-        <span id="progress-text">已刮开 0%</span>
-      </div>
-
-      <div class="play-result" id="play-result" hidden>
-        <div class="result-badge" id="result-badge"></div>
-        <div class="result-actions" id="result-actions">
-          <button class="btn gold" id="btn-redeem" type="button" data-act="redeem">兑奖入账</button>
-          <button class="btn red" type="button" data-act="again">再来一张</button>
-          <button class="btn ghost" type="button" data-act="stop">收手</button>
-        </div>
-      </div>
-
-      <details class="rules" id="rules">
-        <summary>玩法与奖级 <span id="ticket-chance"></span></summary>
-        <p id="ticket-rule"></p>
-        <div class="grades" id="grade-list"></div>
-      </details>
     </div>
   </div>
 
