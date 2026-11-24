@@ -380,6 +380,47 @@ function generateSerial() {
   return date + random;
 }
 
+function applyTicketLayout() {
+  const headW = layerHead.naturalWidth;
+  const headH = layerHead.naturalHeight;
+  const midW = layerMid.naturalWidth;
+  const midH = layerMid.naturalHeight;
+  const footW = layerFoot.naturalWidth;
+  const footH = layerFoot.naturalHeight;
+  if (!headW || !midW || !footW) return;
+
+  const headRatio = headH / headW;
+  const midRatio = midH / midW;
+  const footRatio = footH / footW;
+  const total = headRatio + midRatio + footRatio;
+  if (!total) return;
+
+  const face = document.querySelector('.dgg-face');
+  const headPct = (headRatio / total) * 100;
+  const midPct = (midRatio / total) * 100;
+  const footPct = (footRatio / total) * 100;
+
+  face.style.aspectRatio = `1 / ${total}`;
+  layerHead.style.height = `${headPct}%`;
+  scratchZone.style.top = `${headPct}%`;
+  scratchZone.style.height = `${midPct}%`;
+  layerFoot.style.top = `${headPct + midPct}%`;
+  layerFoot.style.height = `${footPct}%`;
+
+  const faceHeight = face.getBoundingClientRect().height;
+  if (session && !session.autoScrolled && faceHeight > window.innerHeight * 0.9) {
+    session.autoScrolled = true;
+    const panel = document.querySelector('.play-panel');
+    requestAnimationFrame(() => {
+      panel.scrollTop = layerHead.offsetHeight;
+    });
+  }
+
+  if (session && !session.revealed) {
+    requestAnimationFrame(() => initScratch());
+  }
+}
+
 function renderStubBarcode(element) {
   if (!element) return;
   const count = window.innerWidth > 720 ? 180 : 130;
@@ -399,6 +440,7 @@ function openPlay(ticket) {
     revealed: false,
     redeemed: false,
     settled: false,
+    autoScrolled: false,
   };
 
   // 官方三图层票面
@@ -407,6 +449,7 @@ function openPlay(ticket) {
   layerFoot.src = ticket.foot;
   layerResult.src = prize > 0 ? ticket.award : ticket.noAward;
   layerResult.alt = prize > 0 ? '中奖图层' : '未中奖图层';
+  applyTicketLayout();
 
   ticketNameEl.textContent = ticket.name;
   ticketPlayEl.textContent = ticket.play || '即开型彩票';
@@ -860,6 +903,10 @@ function init() {
   renderWallet();
   renderLedger();
   renderStatsPanel();
+
+  [layerHead, layerMid, layerFoot].forEach((img) => {
+    img.addEventListener('load', applyTicketLayout);
+  });
 }
 
 init();
