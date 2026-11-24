@@ -1608,10 +1608,26 @@ main {
     font-size: 16px;
   }
 
+  #play-modal {
+    padding: 0;
+  }
+
   .play-panel {
     width: 100%;
-    padding: 26px 8px 8px;
-    border-radius: 16px;
+    max-height: 100dvh;
+    padding: 30px 0 8px;
+    border-radius: 0;
+    border-left: 0;
+    border-right: 0;
+  }
+
+  .ticket-stage {
+    padding: 0;
+    border-radius: 0;
+  }
+
+  .dgg-ticket {
+    border-radius: 0;
   }
 
   .dgg-stub {
