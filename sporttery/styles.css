@@ -1067,19 +1067,24 @@ main {
 }
 
 .play-result {
+  position: sticky;
+  bottom: 8px;
+  z-index: 9;
   margin-top: 10px;
   padding: 10px;
   border-radius: 13px;
-  background: rgba(255, 255, 255, 0.045);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(26, 10, 12, 0.95);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(10px);
   animation: resultIn 0.3s ease both;
 }
 
 .play-result.is-win {
   border-color: rgba(243, 201, 105, 0.55);
   background:
-    radial-gradient(120% 130% at 50% 0%, rgba(243, 201, 105, 0.22), transparent 65%),
-    rgba(243, 201, 105, 0.06);
+    radial-gradient(120% 130% at 50% 0%, rgba(243, 201, 105, 0.24), transparent 65%),
+    rgba(44, 26, 9, 0.97);
 }
 
 .result-badge {
