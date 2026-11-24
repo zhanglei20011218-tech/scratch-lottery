@@ -137,6 +137,10 @@ const ticketChanceEl = $('#ticket-chance');
 const gradeListEl = $('#grade-list');
 const rulesEl = $('#rules');
 
+const stubSn = $('#stub-sn');
+const stubChance = $('#stub-chance');
+const stubBarcode = $('#stub-barcode');
+
 const progressFill = $('#progress-fill');
 const progressText = $('#progress-text');
 const resultArea = $('#play-result');
@@ -374,6 +378,25 @@ function buyTicket(ticket) {
   openPlay(ticket);
 }
 
+function generateSerial() {
+  const now = new Date();
+  const date =
+    `${now.getFullYear()}${pad2(now.getMonth() + 1)}${pad2(now.getDate())}`;
+  const random = String(Math.floor(Math.random() * 100000000)).padStart(8, '0');
+  return date + random;
+}
+
+function renderStubBarcode(element) {
+  if (!element) return;
+  const count = window.innerWidth > 720 ? 180 : 130;
+  const bars = [];
+  for (let index = 0; index < count; index += 1) {
+    const wide = Math.random() < 0.3;
+    bars.push(`<i style="width:${wide ? 2.5 : 1}px"></i>`);
+  }
+  element.innerHTML = bars.join('');
+}
+
 function openPlay(ticket) {
   const prize = drawPrize(ticket);
   session = {
@@ -397,6 +420,10 @@ function openPlay(ticket) {
   ticketRuleEl.textContent = ticket.rule || '刮开覆盖膜，按票面规则兑奖。';
   ticketChanceEl.textContent = ticket.chance ? `中奖机会 ${ticket.chance} 次` : '';
   rulesEl.open = false;
+
+  stubSn.textContent = generateSerial();
+  stubChance.textContent = ticket.chance ? `${ticket.chance} 次` : '—';
+  renderStubBarcode(stubBarcode);
 
   gradeListEl.innerHTML = ticket.grades
     .map(
