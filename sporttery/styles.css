@@ -600,7 +600,7 @@ main {
 .play-panel {
   position: relative;
   z-index: 1;
-  width: min(560px, 100%);
+  width: min(520px, 100%);
   max-height: calc(100dvh - 20px);
   overflow-y: auto;
   padding: 30px 12px 12px;
@@ -657,12 +657,21 @@ main {
 
 .dgg-ticket {
   position: relative;
+  display: flex;
+  flex-direction: column;
   width: 100%;
-  aspect-ratio: 0.9;
   overflow: hidden;
   border-radius: 3px;
-  background: #f3ead9;
+  background: #fbf5e6;
   box-shadow: 0 10px 26px rgba(0, 0, 0, 0.4);
+}
+
+.dgg-face {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1;
+  overflow: hidden;
+  background: #f3ead9;
 }
 
 .dgg-layer {
@@ -706,6 +715,246 @@ main {
 
 .dgg-result {
   z-index: 1;
+}
+
+/* 兑奖联票根 */
+.dgg-stub {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+  min-height: 350px;
+  height: auto;
+  padding: 13px 15px 10px;
+  overflow: visible;
+  color: #2a1c19;
+  border-top: 1px dashed rgba(43, 35, 24, 0.32);
+  background:
+    radial-gradient(120% 80% at 50% 0%, #fffdf7, transparent 60%),
+    repeating-linear-gradient(
+      0deg,
+      transparent 0 21px,
+      rgba(120, 95, 55, 0.028) 21px 22px
+    ),
+    #fbf5e6;
+}
+
+.stub-title {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.stub-title h3 {
+  margin: 0;
+  color: #2a1c19;
+  font-size: 20px;
+  font-weight: 900;
+  letter-spacing: 1px;
+  line-height: 1.2;
+}
+
+.stub-title p {
+  margin: 2px 0 0;
+  color: #9a6a52;
+  font-size: 10px;
+  letter-spacing: 0.4px;
+}
+
+.stub-price {
+  flex: none;
+  color: var(--red);
+  font-family: var(--font-num);
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.stub-price b {
+  font-size: 24px;
+  letter-spacing: 0.4px;
+}
+
+.stub-progress {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 8px;
+  color: #a1927a;
+}
+
+.stub-progress .progress-bar {
+  flex: 1;
+  height: 4px;
+  border-radius: 99px;
+  background: rgba(200, 16, 46, 0.12);
+  overflow: hidden;
+}
+
+.stub-progress .progress-bar i {
+  display: block;
+  width: 0;
+  height: 100%;
+  border-radius: inherit;
+  background: linear-gradient(90deg, #d21b35, #f3c969);
+  transition: width 0.16s ease;
+}
+
+.stub-top {
+  display: flex;
+  align-items: stretch;
+  gap: 9px;
+}
+
+.stub-side {
+  flex: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4px 3px;
+  border: 1px solid rgba(200, 16, 46, 0.38);
+  border-radius: 2px;
+  color: var(--red);
+  font-size: 9px;
+  font-weight: 800;
+  letter-spacing: 4px;
+  writing-mode: vertical-rl;
+  text-orientation: upright;
+}
+
+.stub-main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 3px;
+  min-width: 0;
+}
+
+.stub-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  padding-bottom: 2px;
+  border-bottom: 1px dotted rgba(43, 35, 24, 0.14);
+  font-size: 8px;
+  color: #9a8a7c;
+  letter-spacing: 0.3px;
+}
+
+.stub-row b {
+  max-width: 150px;
+  overflow: hidden;
+  color: #3a2c24;
+  font-family: var(--font-num);
+  font-size: 9px;
+  font-weight: 700;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.stub-sim {
+  flex: none;
+  align-self: center;
+  padding: 3px 6px;
+  border: 1px solid rgba(200, 16, 46, 0.5);
+  border-radius: 2px;
+  color: rgba(180, 18, 27, 0.85);
+  font-size: 7.5px;
+  font-weight: 700;
+  line-height: 1.35;
+  letter-spacing: 0.5px;
+  text-align: center;
+  transform: rotate(-6deg);
+}
+
+.stub-barcode {
+  display: flex;
+  align-items: stretch;
+  gap: 1px;
+  height: 36px;
+  margin-top: 3px;
+  overflow: hidden;
+  opacity: 0.8;
+}
+
+.stub-barcode i {
+  display: block;
+  flex: none;
+  height: 100%;
+  background: #2a2318;
+}
+
+.stub-tip {
+  margin: 0;
+  font-size: 7.5px;
+  line-height: 1.6;
+  color: #a1927a;
+}
+
+.stub-note {
+  margin: 0;
+  font-size: 7.5px;
+  line-height: 1.4;
+  color: #b3a488;
+  text-align: center;
+}
+
+.stub-bottom {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  margin-top: auto;
+  padding-top: 5px;
+  border-top: 1px dashed rgba(43, 35, 24, 0.18);
+  font-size: 7.5px;
+  color: #9a8a7c;
+}
+
+.dgg-stub .rules {
+  margin: 0;
+  padding: 5px 0 0;
+  border: 0;
+  border-top: 1px dashed rgba(43, 35, 24, 0.16);
+  border-radius: 0;
+  background: none;
+  color: #8a7a62;
+  font-size: 8.5px;
+  line-height: 1.55;
+}
+
+.dgg-stub .rules summary {
+  color: #b4121b;
+  font-size: 9px;
+  letter-spacing: 0.3px;
+}
+
+.dgg-stub .rules summary span {
+  color: #a1927a;
+  font-size: 8px;
+}
+
+.dgg-stub .rules p {
+  margin: 5px 0 0;
+}
+
+.dgg-stub .grades {
+  gap: 1px 12px;
+  margin-top: 5px;
+  padding-top: 5px;
+  border-top: 1px dashed rgba(43, 35, 24, 0.12);
+}
+
+.dgg-stub .grade-row {
+  font-size: 8px;
+  color: #8a7a62;
+}
+
+.dgg-stub .grade-row b {
+  color: #3a2c24;
+  font-size: 8.5px;
 }
 
 #scratch-canvas {
@@ -874,6 +1123,56 @@ main {
   display: flex;
   gap: 7px;
   flex-wrap: wrap;
+}
+
+/* 兑奖联上的结果面板 */
+.dgg-stub .play-result {
+  position: absolute;
+  left: 8px;
+  right: 8px;
+  top: 50%;
+  z-index: 8;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin: 0;
+  padding: 12px 10px;
+  border-radius: 8px;
+  background: rgba(255, 251, 242, 0.97);
+  border: 1px solid rgba(200, 16, 46, 0.22);
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.16);
+  transform: translateY(-50%);
+  animation: fadeIn 0.25s ease both;
+}
+
+.dgg-stub .play-result.is-win {
+  border-color: rgba(217, 165, 60, 0.7);
+  background:
+    radial-gradient(120% 130% at 50% 0%, #fff7df, transparent 70%),
+    #fdf1cd;
+}
+
+.dgg-stub .result-kicker {
+  color: #7b6b62;
+}
+
+.dgg-stub .play-result.is-win .result-kicker {
+  color: #b4121b;
+}
+
+.dgg-stub .result-amount {
+  color: #b4121b;
+  text-shadow: none;
+}
+
+.dgg-stub .result-amount.is-muted {
+  color: #8a7a62;
+}
+
+.dgg-stub .result-actions .btn.ghost {
+  color: #6f5f55;
+  background: rgba(36, 26, 24, 0.05);
+  border-color: rgba(36, 26, 24, 0.16);
 }
 
 .btn {
@@ -1313,6 +1612,74 @@ main {
     width: 100%;
     padding: 26px 8px 8px;
     border-radius: 16px;
+  }
+
+  .dgg-stub {
+    min-height: 270px;
+    height: auto;
+    padding: 10px 11px 8px;
+    gap: 5px;
+  }
+
+  .stub-title h3 {
+    font-size: 18px;
+  }
+
+  .stub-title p {
+    font-size: 9px;
+  }
+
+  .stub-price b {
+    font-size: 21px;
+  }
+
+  .stub-progress {
+    font-size: 7px;
+  }
+
+  .stub-side {
+    font-size: 8px;
+    letter-spacing: 3px;
+  }
+
+  .stub-row {
+    font-size: 7px;
+  }
+
+  .stub-row b {
+    font-size: 8px;
+    max-width: 120px;
+  }
+
+  .stub-barcode {
+    height: 28px;
+  }
+
+  .stub-tip {
+    font-size: 7px;
+    line-height: 1.5;
+  }
+
+  .stub-note {
+    font-size: 6.5px;
+  }
+
+  .stub-bottom {
+    font-size: 6.5px;
+  }
+
+  .stub-sim {
+    font-size: 6.5px;
+  }
+
+  .dgg-stub .play-result {
+    left: 6px;
+    right: 6px;
+    padding: 8px;
+  }
+
+  .dgg-stub .result-amount {
+    font-size: 24px;
   }
 
   .ticket-info h3 {
